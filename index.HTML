@@ -151,7 +151,7 @@ nav {
 .hero-inner {
   max-width: 1140px; margin: 0 auto; width: 100%;
   display: grid;
-  grid-template-columns: 1fr 400px;
+  grid-template-columns: 1fr 360px;
   gap: 4rem;
   align-items: center;
   position: relative; z-index: 1;
@@ -725,7 +725,7 @@ td[data-lang], th[data-lang]  { display: none; }
 .lang-pt td[data-lang="pt"]   { display: table-cell; }
 
 /* RESPONSIVE */
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
   .hero-inner { grid-template-columns: 1fr; }
   .status-panel { display: none; }
 }
@@ -808,7 +808,7 @@ td[data-lang], th[data-lang]  { display: none; }
 
 ```
 <!-- Live device status card -->
-<div class="status-panel fade-up" style="transition-delay:0.2s">
+<div class="status-panel">
   <div class="status-panel-header">
     <span>UNIT-0042 · HOTEL LISBOA</span>
     <span class="status-live"><div class="status-live-dot"></div>LIVE</span>
