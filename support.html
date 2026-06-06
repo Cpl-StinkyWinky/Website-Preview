@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Support — GenGuardian</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:   #0a0a0a;
+      --black2:  #111111;
+      --black3:  #171717;
+      --white:   #f0ede8;
+      --dim:     #6b6b6b;
+      --accent:  #3ab4f2;
+      --red:     #c0392b;
+      --border:  rgba(240,237,232,0.08);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Archivo', sans-serif;
+      font-weight: 400;
+      overflow-x: hidden;
+      padding-bottom: 64px;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 28px 52px;
+      background: rgba(10,10,10,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 1rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--white);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-mark {
+      width: 26px; height: 26px;
+      border: 1.5px solid var(--accent);
+      border-radius: 3px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .logo-mark svg { width: 14px; height: 14px; color: var(--accent); }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .nav-right a {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-right a:hover { color: var(--white); }
+
+    .nav-portal {
+      color: var(--white) !important;
+      border-bottom: 1px solid var(--accent);
+      padding-bottom: 1px;
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      padding: 160px 52px 80px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .hero-tag::before {
+      content: '';
+      width: 28px; height: 1px;
+      background: var(--accent);
+    }
+
+    .hero h1 {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: clamp(3rem, 7vw, 7rem);
+      line-height: 0.9;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+
+    .hero p {
+      color: var(--dim);
+      font-size: 1rem;
+      max-width: 480px;
+      line-height: 1.75;
+      font-weight: 300;
+    }
+
+    /* ─── QUICK LINKS ─── */
+    .quick-links {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .quick-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 40px 52px;
+      text-decoration: none;
+      color: var(--white);
+      border-right: 1px solid var(--border);
+      transition: background 0.2s;
+    }
+
+    .quick-link:last-child { border-right: none; }
+    .quick-link:hover { background: rgba(240,237,232,0.03); }
+
+    .quick-link-left {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .quick-link-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--dim);
+    }
+
+    .quick-link-title {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 1.5rem;
+      text-transform: uppercase;
+    }
+
+    .quick-link-arrow {
+      font-size: 1.5rem;
+      color: var(--accent);
+      transition: transform 0.2s;
+    }
+
+    .quick-link:hover .quick-link-arrow { transform: translateX(6px); }
+
+    /* ─── SECTIONS ─── */
+    .section {
+      padding: 100px 52px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--dim);
+      margin-bottom: 52px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .section-tag::before {
+      content: attr(data-num);
+      color: var(--accent);
+    }
+
+    .section-title {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      line-height: 0.92;
+      text-transform: uppercase;
+      margin-bottom: 60px;
+    }
+
+    /* ─── HUBSPOT FORM ─── */
+    .form-wrap {
+      max-width: 680px;
+    }
+
+    /* Override HubSpot default styles */
+    .form-wrap .hs-form-private {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .hbspt-form .hs-form fieldset {
+      max-width: 100% !important;
+    }
+
+    .hbspt-form .hs-input,
+    .hbspt-form select,
+    .hbspt-form textarea {
+      width: 100% !important;
+      background: var(--black3) !important;
+      border: 1px solid var(--border) !important;
+      border-radius: 0 !important;
+      color: var(--white) !important;
+      font-family: 'Archivo', sans-serif !important;
+      font-size: 0.9rem !important;
+      padding: 14px 16px !important;
+      outline: none !important;
+      transition: border-color 0.2s !important;
+      -webkit-appearance: none !important;
+    }
+
+    .hbspt-form .hs-input:focus,
+    .hbspt-form select:focus,
+    .hbspt-form textarea:focus {
+      border-color: var(--accent) !important;
+    }
+
+    .hbspt-form label {
+      font-family: 'Space Mono', monospace !important;
+      font-size: 0.62rem !important;
+      letter-spacing: 0.16em !important;
+      text-transform: uppercase !important;
+      color: var(--dim) !important;
+      display: block !important;
+      margin-bottom: 8px !important;
+      margin-top: 20px !important;
+    }
+
+    .hbspt-form .hs-error-msgs {
+      list-style: none !important;
+      margin-top: 6px !important;
+    }
+
+    .hbspt-form .hs-error-msgs li label {
+      color: var(--red) !important;
+      font-size: 0.6rem !important;
+      margin: 0 !important;
+    }
+
+    .hbspt-form .hs-button {
+      margin-top: 32px !important;
+      background: var(--white) !important;
+      color: var(--black) !important;
+      border: none !important;
+      border-radius: 0 !important;
+      font-family: 'Space Mono', monospace !important;
+      font-size: 0.72rem !important;
+      letter-spacing: 0.14em !important;
+      text-transform: uppercase !important;
+      padding: 16px 36px !important;
+      cursor: pointer !important;
+      transition: background 0.2s !important;
+      width: auto !important;
+    }
+
+    .hbspt-form .hs-button:hover {
+      background: var(--accent) !important;
+    }
+
+    .hbspt-form .submitted-message {
+      font-family: 'Space Mono', monospace !important;
+      font-size: 0.8rem !important;
+      color: var(--accent) !important;
+      letter-spacing: 0.1em !important;
+      padding: 24px 0 !important;
+      border-top: 1px solid var(--border) !important;
+    }
+
+    .response-note {
+      margin-top: 24px;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
+      color: var(--dim);
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .response-note::before {
+      content: '';
+      width: 20px; height: 1px;
+      background: var(--dim);
+    }
+
+    /* ─── FAQ ─── */
+    .faq-categories {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .faq-category {
+      border-top: 1px solid var(--border);
+    }
+
+    .faq-category:last-child {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .faq-category-header {
+      padding: 28px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .faq-category-title {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .faq-cat-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.16em;
+      color: var(--accent);
+      font-weight: 400;
+    }
+
+    .faq-category-toggle {
+      font-size: 1.2rem;
+      color: var(--dim);
+      transition: transform 0.3s, color 0.2s;
+      line-height: 1;
+    }
+
+    .faq-category.open .faq-category-toggle {
+      transform: rotate(45deg);
+      color: var(--accent);
+    }
+
+    .faq-items {
+      display: none;
+      flex-direction: column;
+      padding-bottom: 20px;
+    }
+
+    .faq-category.open .faq-items { display: flex; }
+
+    .faq-item {
+      border-top: 1px solid var(--border);
+    }
+
+    .faq-question {
+      padding: 22px 0 22px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      user-select: none;
+      gap: 20px;
+    }
+
+    .faq-question-text {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--white);
+      line-height: 1.4;
+    }
+
+    .faq-toggle {
+      color: var(--dim);
+      font-size: 1rem;
+      transition: transform 0.25s, color 0.2s;
+      flex-shrink: 0;
+    }
+
+    .faq-item.open .faq-toggle {
+      transform: rotate(45deg);
+      color: var(--accent);
+    }
+
+    .faq-answer {
+      display: none;
+      padding: 0 0 22px 24px;
+      color: var(--dim);
+      font-size: 0.875rem;
+      line-height: 1.8;
+      font-weight: 300;
+      max-width: 640px;
+    }
+
+    .faq-item.open .faq-answer { display: block; }
+
+    /* ─── CONTACT FALLBACK ─── */
+    .contact-fallback {
+      padding: 80px 52px;
+      border-bottom: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .contact-fallback h3 {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 2rem;
+      text-transform: uppercase;
+      line-height: 0.95;
+      margin-bottom: 16px;
+    }
+
+    .contact-fallback p {
+      color: var(--dim);
+      font-size: 0.9rem;
+      line-height: 1.75;
+      font-weight: 300;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 28px;
+      background: var(--black3);
+      border: 1px solid var(--border);
+      text-decoration: none;
+      color: var(--white);
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .contact-link:hover {
+      border-color: rgba(58,180,242,0.3);
+      background: rgba(58,180,242,0.04);
+    }
+
+    .contact-link-left {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .contact-link-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--dim);
+    }
+
+    .contact-link-value {
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .contact-link-arrow { color: var(--accent); }
+
+    /* ─── STICKY BAR ─── */
+    .sticky-bar {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      z-index: 300;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-top: 1px solid var(--border);
+      background: rgba(10,10,10,0.96);
+      backdrop-filter: blur(16px);
+    }
+
+    .sticky-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 20px;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .sticky-btn:first-child {
+      color: var(--black);
+      background: var(--white);
+      border-right: 1px solid var(--border);
+    }
+
+    .sticky-btn:first-child:hover { background: var(--accent); }
+
+    .sticky-btn:last-child {
+      color: var(--white);
+      background: transparent;
+    }
+
+    .sticky-btn:last-child:hover { background: rgba(240,237,232,0.06); }
+
+    /* ─── MOBILE ─── */
+    @media (max-width: 768px) {
+      nav { padding: 20px; }
+      .nav-right { gap: 20px; }
+      .nav-right a:not(.nav-portal) { display: none; }
+      .hero { padding: 120px 20px 60px; }
+      .quick-links { grid-template-columns: 1fr; }
+      .quick-link { border-right: none; border-bottom: 1px solid var(--border); padding: 32px 20px; }
+      .section { padding: 80px 20px; }
+      .contact-fallback { grid-template-columns: 1fr; padding: 80px 20px; gap: 40px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <div class="logo-mark">
+      <svg viewBox="0 0 14 14" fill="none">
+        <path d="M1 4l6-3 6 3v4.5c0 3-2.5 5.5-6 6.5-3.5-1-6-3.5-6-6.5V4z" stroke="currentColor" stroke-width="1.2"/>
+        <path d="M4 9l1.5 2 3.5-5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    GenGuardian
+  </a>
+  <div class="nav-right">
+    <a href="index.html#how">How It Works</a>
+    <a href="index.html">Home</a>
+    <a href="https://hosting.genguardian.pt" target="_blank" class="nav-portal">Client Portal →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">Support Center</div>
+  <h1>We're here<br/>when it<br/>matters.</h1>
+  <p>Submit a ticket and we'll get back to you within one business day. For urgent issues with a monitored generator, use the priority option on the form.</p>
+</div>
+
+<!-- QUICK LINKS -->
+<div class="quick-links">
+  <a href="#ticket" class="quick-link">
+    <div class="quick-link-left">
+      <span class="quick-link-tag">Have an issue?</span>
+      <span class="quick-link-title">Submit a Ticket</span>
+    </div>
+    <span class="quick-link-arrow">→</span>
+  </a>
+  <a href="#faq" class="quick-link">
+    <div class="quick-link-left">
+      <span class="quick-link-tag">Common questions</span>
+      <span class="quick-link-title">Browse FAQ</span>
+    </div>
+    <span class="quick-link-arrow">→</span>
+  </a>
+</div>
+
+<!-- TICKET FORM -->
+<section class="section" id="ticket">
+  <div class="section-tag" data-num="01 —">Submit a Ticket</div>
+  <h2 class="section-title">Tell us<br/>what's wrong.</h2>
+  <div class="form-wrap">
+    <script charset="utf-8" type="text/javascript" src="//js-eu1.hsforms.net/forms/embed/v2.js"></script>
+    <script>
+      hbspt.forms.create({
+        portalId: "148600057",
+        formId: "dce25f48-51fd-45fe-b30d-84e1e6383628",
+        region: "eu1"
+      });
+    </script>
+    <p class="response-note">Response within 1 business day — urgent issues prioritised</p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" id="faq">
+  <div class="section-tag" data-num="02 —">FAQ</div>
+  <h2 class="section-title">Common<br/>questions.</h2>
+
+  <div class="faq-categories">
+
+    <!-- GETTING STARTED -->
+    <div class="faq-category">
+      <div class="faq-category-header" onclick="toggleCategory(this)">
+        <div class="faq-category-title">
+          Getting Started
+          <span class="faq-cat-tag">04 questions</span>
+        </div>
+        <span class="faq-category-toggle">+</span>
+      </div>
+      <div class="faq-items">
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span class="faq-question-text">How long does installation take?</span>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">Installation of the FMC234 device on a single generator typically takes under one hour. No infrastructure changes are required — the device connects directly to the generator panel and communicates over 4G cellular.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span class="faq-question-text">Does it work on any generator brand?</span>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">Yes. GenGuardian is brand-agnostic — it works on any standby generator regardless of manufacturer, model, or age. There is no proprietary hardware requirement.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span class="faq-question-text">What do I need to have ready before installation?</span>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">Access to the generator panel and a confirmed service contact for SMS alerts. No WiFi credentials, no network configuration, and no changes to existing building infrastructure are needed.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span class="faq-question-text">How do I access the monitoring dashboard?</span>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">Your dashboard is accessible at hosting.genguardian.pt. Login credentials are provided after your first unit is activated. Contact support if you have not received your credentials.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DEVICE & HARDWARE -->
+    <div class="faq-category">
+      <div class="faq-category-header" onclick="toggleCategory(this)">
+        <div class="faq-category-title">
+          Device & Hardware
+          <span class="faq-cat-tag">04 questions</span>
+        </div>
+        <span class="faq-category-toggle">+</span>
+      </div>
+      <div class="faq-items">
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span class="faq-question-text">What happens if the building loses power?</span>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">The FMC234 has an internal 1000mAh battery backup and communicates over 4G cellular — completely independent of the building's power supply and WiFi. It continues operating through a blackout, which is exactly when it matters most.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span class="faq-question-text">The device shows offline in the dashboard. What should I do?</span>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">First check that the device has power and the indicator light is on. If the unit is powered but showing offline, check cellular signal strength at the installation location. Submit a ticket if the issue persists and include the device ID shown in the dashboard.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span class="faq-question-text">How often does the device transmit data?</span>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">The device transmits status updates continuously over cellular. Event-based alerts — such as a generator start, stop, or fault — are transmitted immediately in real time.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span class="faq-question-text">Does the device require a SIM card?</span>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">Yes. Each device uses a dedicated SIM included with your subscription. The SIM is pre-configured and active — no setup required on your end.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ALERTS & NOTIFICATIONS -->
+    <div class="faq-category">
+      <div class="faq-category-header" onclick="toggleCategory(this)">
+        <div class="faq-category-title">
+          Alerts & Notifications
+          <span class="faq-cat-tag">03 questions</span>
+        </div>
+        <span class="faq-category-toggle">+</span>
+      </div>
+      <div class="faq-items">
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span class="faq-question-text">Who receives the SMS alerts?</span>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">Alerts are sent to the service contacts configured in your dashboard. By default this is your service team — not the building owner. You control who receives notifications and can update contacts at any time from the dashboard.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span class="faq-question-text">What events trigger an alert?</span>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">Configurable alert conditions include: generator failure to start, unexpected shutdown, low fuel, loss of mains power, generator running beyond expected duration, and device going offline. Alert conditions can be adjusted in your dashboard settings.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span class="faq-question-text">I am not receiving alerts. What should I check?</span>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">Verify the contact number is correctly entered in the dashboard and that SMS is not blocked by your carrier. Check that alert conditions are enabled for the relevant events. If everything looks correct and alerts are still not arriving, submit a ticket with your device ID and the expected alert type.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BILLING & ACCOUNT -->
+    <div class="faq-category">
+      <div class="faq-category-header" onclick="toggleCategory(this)">
+        <div class="faq-category-title">
+          Billing & Account
+          <span class="faq-cat-tag">03 questions</span>
+        </div>
+        <span class="faq-category-toggle">+</span>
+      </div>
+      <div class="faq-items">
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span class="faq-question-text">How does billing work?</span>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">Billing is a monthly subscription per monitored unit, invoiced in arrears. A one-time device fee applies at activation. Invoices are sent to the billing contact on your account. Contact support to update billing details or request copies of past invoices.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span class="faq-question-text">How do I add or remove units from my account?</span>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">Contact support to add new units or deactivate existing ones. Changes to your unit count are reflected in the following billing cycle.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span class="faq-question-text">How do I update my account contact or login details?</span>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">Login and contact updates can be requested via the support form. Include your current registered email and the details you want updated. Changes are processed within one business day.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- COMPLIANCE -->
+    <div class="faq-category">
+      <div class="faq-category-header" onclick="toggleCategory(this)">
+        <div class="faq-category-title">
+          Compliance
+          <span class="faq-cat-tag">02 questions</span>
+        </div>
+        <span class="faq-category-toggle">+</span>
+      </div>
+      <div class="faq-items">
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span class="faq-question-text">Does GenGuardian help meet RT-SCIE requirements?</span>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">Yes. Artigo 72º of Portaria 1532/2008 (RT-SCIE) mandates verified emergency backup power in hotels, hospitals, and large commercial buildings. GenGuardian provides continuous monitoring and documented event logs that support compliance with this requirement.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span class="faq-question-text">Can I export monitoring logs for compliance documentation?</span>
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer">Yes. Event logs and generator activity reports can be exported from your dashboard. Contact support if you need a specific format or date range for a compliance audit.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- STICKY BAR -->
+<div class="sticky-bar">
+  <a href="https://hosting.genguardian.pt" target="_blank" class="sticky-btn">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+      <rect x="1" y="4" width="12" height="9" rx="1.5" stroke="currentColor" stroke-width="1.3"/>
+      <path d="M4 4V3a3 3 0 0 1 6 0v1" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+    </svg>
+    Client Login
+  </a>
+  <a href="#ticket" class="sticky-btn">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+      <circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.3"/>
+      <path d="M7 10v.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      <path d="M5 5.5a2 2 0 1 1 2 2v1" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+    </svg>
+    Submit Ticket
+  </a>
+</div>
+
+<script>
+  function toggleCategory(header) {
+    const cat = header.parentElement;
+    cat.classList.toggle('open');
+  }
+
+  function toggleFaq(question) {
+    const item = question.parentElement;
+    item.classList.toggle('open');
+  }
+</script>
+</body>
+</html>
