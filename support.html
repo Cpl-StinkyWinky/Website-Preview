@@ -292,7 +292,94 @@
       background: var(--accent) !important;
     }
 
-    .hbspt-form .submitted-message {
+    /* ─── FORCE HUBSPOT DARK THEME ─── */
+.hbspt-form { color-scheme: dark; }
+
+.hbspt-form .hs-form-field { margin-bottom: 20px; }
+
+.hbspt-form .hs-input:not([type=checkbox]):not([type=radio]),
+.hbspt-form input[type=text],
+.hbspt-form input[type=email],
+.hbspt-form input[type=tel],
+.hbspt-form input[type=number],
+.hbspt-form textarea,
+.hbspt-form select {
+  background-color: #171717 !important;
+  background: #171717 !important;
+  color: #f0ede8 !important;
+  border: 1px solid rgba(240,237,232,0.12) !important;
+  border-radius: 0 !important;
+  font-family: "Archivo", sans-serif !important;
+  font-size: 0.9rem !important;
+  padding: 14px 16px !important;
+  width: 100% !important;
+  box-shadow: none !important;
+  outline: none !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+}
+
+.hbspt-form .hs-input:not([type=checkbox]):not([type=radio]):focus,
+.hbspt-form input:focus,
+.hbspt-form textarea:focus,
+.hbspt-form select:focus {
+  border-color: #3ab4f2 !important;
+  background-color: #1e1e1e !important;
+  background: #1e1e1e !important;
+}
+
+.hbspt-form .hs-input::placeholder,
+.hbspt-form input::placeholder,
+.hbspt-form textarea::placeholder {
+  color: #6b6b6b !important;
+  opacity: 1 !important;
+}
+
+.hbspt-form option {
+  background: #171717 !important;
+  color: #f0ede8 !important;
+}
+
+.hbspt-form .hs-form-checkbox label,
+.hbspt-form .hs-form-radio label {
+  color: #f0ede8 !important;
+  font-family: "Archivo", sans-serif !important;
+  font-size: 0.875rem !important;
+  font-weight: 300 !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+  margin-top: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  cursor: pointer !important;
+}
+
+.hbspt-form .hs-form-checkbox input[type=checkbox],
+.hbspt-form .hs-form-radio input[type=radio] {
+  width: 16px !important;
+  height: 16px !important;
+  accent-color: #3ab4f2 !important;
+  flex-shrink: 0 !important;
+}
+
+.hbspt-form .inputs-list {
+  list-style: none !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 10px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.hbspt-form .hs-richtext,
+.hbspt-form .hs-richtext p {
+  color: #6b6b6b !important;
+  font-size: 0.8rem !important;
+  font-family: "Archivo", sans-serif !important;
+}
+
+.hbspt-form .submitted-message {
       font-family: 'Space Mono', monospace !important;
       font-size: 0.8rem !important;
       color: var(--accent) !important;
@@ -818,6 +905,68 @@
 </div>
 
 <script>
+  // Force dark styles on HubSpot form after it renders
+  function applyHubspotDark() {
+    const inputs = document.querySelectorAll('.hbspt-form input:not([type=checkbox]):not([type=radio]), .hbspt-form textarea, .hbspt-form select');
+    inputs.forEach(el => {
+      el.style.setProperty('background-color', '#171717', 'important');
+      el.style.setProperty('background', '#171717', 'important');
+      el.style.setProperty('color', '#f0ede8', 'important');
+      el.style.setProperty('border', '1px solid rgba(240,237,232,0.12)', 'important');
+      el.style.setProperty('border-radius', '0', 'important');
+      el.style.setProperty('font-family', 'Archivo, sans-serif', 'important');
+      el.style.setProperty('padding', '14px 16px', 'important');
+      el.style.setProperty('width', '100%', 'important');
+      el.style.setProperty('box-shadow', 'none', 'important');
+      el.style.setProperty('-webkit-appearance', 'none', 'important');
+      el.addEventListener('focus', function() {
+        this.style.setProperty('background-color', '#1e1e1e', 'important');
+        this.style.setProperty('border-color', '#3ab4f2', 'important');
+      });
+      el.addEventListener('blur', function() {
+        this.style.setProperty('background-color', '#171717', 'important');
+        this.style.setProperty('border-color', 'rgba(240,237,232,0.12)', 'important');
+      });
+    });
+    const labels = document.querySelectorAll('.hbspt-form label');
+    labels.forEach(el => {
+      if (!el.closest('.hs-form-checkbox') && !el.closest('.hs-form-radio')) {
+        el.style.setProperty('color', '#6b6b6b', 'important');
+        el.style.setProperty('font-family', 'Space Mono, monospace', 'important');
+        el.style.setProperty('font-size', '0.62rem', 'important');
+        el.style.setProperty('letter-spacing', '0.16em', 'important');
+        el.style.setProperty('text-transform', 'uppercase', 'important');
+      }
+    });
+    const btn = document.querySelector('.hbspt-form .hs-button');
+    if (btn) {
+      btn.style.setProperty('background', '#f0ede8', 'important');
+      btn.style.setProperty('color', '#0a0a0a', 'important');
+      btn.style.setProperty('border', 'none', 'important');
+      btn.style.setProperty('border-radius', '0', 'important');
+      btn.style.setProperty('font-family', 'Space Mono, monospace', 'important');
+      btn.style.setProperty('font-size', '0.72rem', 'important');
+      btn.style.setProperty('letter-spacing', '0.14em', 'important');
+      btn.style.setProperty('text-transform', 'uppercase', 'important');
+      btn.style.setProperty('padding', '16px 36px', 'important');
+      btn.style.setProperty('cursor', 'pointer', 'important');
+      btn.style.setProperty('margin-top', '32px', 'important');
+      btn.addEventListener('mouseover', function() { this.style.setProperty('background', '#3ab4f2', 'important'); });
+      btn.addEventListener('mouseout', function() { this.style.setProperty('background', '#f0ede8', 'important'); });
+    }
+  }
+
+  // Watch for HubSpot form to render
+  const observer = new MutationObserver(() => {
+    if (document.querySelector('.hbspt-form input, .hbspt-form select')) {
+      applyHubspotDark();
+    }
+  });
+  observer.observe(document.body, { childList: true, subtree: true });
+  // Also try after delays in case MutationObserver misses it
+  setTimeout(applyHubspotDark, 1000);
+  setTimeout(applyHubspotDark, 2500);
+
   function toggleCategory(header) {
     const cat = header.parentElement;
     cat.classList.toggle('open');
