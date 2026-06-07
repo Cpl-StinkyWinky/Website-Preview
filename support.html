@@ -545,6 +545,17 @@
   <div class="section-tag" data-num="01 —">Submit a Ticket</div>
   <h2 class="section-title">Tell us<br/>what's wrong.</h2>
   <div class="form-wrap" id="hs-form-wrap">
+    <script>
+      function initHubspotForm() {
+        hbspt.forms.create({
+          portalId: "148600057",
+          formId: "dce25f48-51fd-45fe-b30d-84e1e6383628",
+          region: "eu1",
+          onFormReady: function() { applyHubspotDark(); },
+          onFormSubmit: function() { applyHubspotDark(); }
+        });
+      }
+    </script>
     <script charset="utf-8" type="text/javascript" src="//js-eu1.hsforms.net/forms/embed/v2.js" onload="initHubspotForm()"></script>
     <p class="response-note">Response within 1 business day — urgent issues prioritised</p>
   </div>
@@ -697,20 +708,6 @@
 </div>
 
 <script>
-  function initHubspotForm() {
-    hbspt.forms.create({
-      portalId: "148600057",
-      formId: "dce25f48-51fd-45fe-b30d-84e1e6383628",
-      region: "eu1",
-      onFormReady: function() {
-        applyHubspotDark();
-      },
-      onFormSubmit: function() {
-        applyHubspotDark();
-      }
-    });
-  }
-
   function applyHubspotDark() {
     const sel = '.hbspt-form input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]), .hbspt-form textarea, .hbspt-form select';
     document.querySelectorAll(sel).forEach(el => {
