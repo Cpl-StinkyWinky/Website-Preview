@@ -212,70 +212,118 @@
       margin-bottom: 60px;
     }
 
-    /* ─── HUBSPOT FORM ─── */
-    .form-wrap {
-      max-width: 680px;
-    }
+    /* ─── HUBSPOT FORM WRAPPER ─── */
+    .form-wrap { max-width: 680px; }
 
-    /* Override HubSpot default styles */
-    .form-wrap .hs-form-private {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-    }
+    /* Base resets — these fire before HubSpot JS injects its own sheet */
+    .hbspt-form *,
+    .hbspt-form *::before,
+    .hbspt-form *::after { box-sizing: border-box; }
 
-    .hbspt-form .hs-form fieldset {
-      max-width: 100% !important;
-    }
+    .hbspt-form { color-scheme: dark; }
 
-    .hbspt-form .hs-input,
-    .hbspt-form select,
-    .hbspt-form textarea {
-      width: 100% !important;
-      background: var(--black3) !important;
-      border: 1px solid var(--border) !important;
+    .hbspt-form .hs-form-field { margin-bottom: 20px !important; }
+
+    .hbspt-form fieldset { max-width: 100% !important; border: none !important; }
+
+    /* All text inputs, textarea, select */
+    .hbspt-form input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]),
+    .hbspt-form textarea,
+    .hbspt-form select {
+      background-color: #171717 !important;
+      color: #f0ede8 !important;
+      -webkit-text-fill-color: #f0ede8 !important;
+      caret-color: #3ab4f2 !important;
+      border: 1px solid rgba(240,237,232,0.12) !important;
       border-radius: 0 !important;
-      color: var(--white) !important;
       font-family: 'Archivo', sans-serif !important;
       font-size: 0.9rem !important;
       padding: 14px 16px !important;
+      width: 100% !important;
+      box-shadow: none !important;
       outline: none !important;
-      transition: border-color 0.2s !important;
       -webkit-appearance: none !important;
+      appearance: none !important;
+      transition: border-color 0.2s !important;
     }
 
-    .hbspt-form .hs-input:focus,
-    .hbspt-form select:focus,
-    .hbspt-form textarea:focus {
-      border-color: var(--accent) !important;
+    .hbspt-form input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):focus,
+    .hbspt-form textarea:focus,
+    .hbspt-form select:focus {
+      border-color: #3ab4f2 !important;
+      background-color: #1e1e1e !important;
     }
 
+    /* Autofill override */
+    .hbspt-form input:-webkit-autofill,
+    .hbspt-form input:-webkit-autofill:hover,
+    .hbspt-form input:-webkit-autofill:focus,
+    .hbspt-form input:-webkit-autofill:active {
+      -webkit-text-fill-color: #f0ede8 !important;
+      -webkit-box-shadow: 0 0 0px 1000px #171717 inset !important;
+      box-shadow: 0 0 0px 1000px #171717 inset !important;
+      background-color: #171717 !important;
+      caret-color: #3ab4f2 !important;
+    }
+
+    /* Placeholder */
+    .hbspt-form input::placeholder,
+    .hbspt-form textarea::placeholder { color: #6b6b6b !important; opacity: 1 !important; }
+
+    /* Select options */
+    .hbspt-form select option { background: #171717 !important; color: #f0ede8 !important; }
+
+    /* Labels */
     .hbspt-form label {
       font-family: 'Space Mono', monospace !important;
       font-size: 0.62rem !important;
       letter-spacing: 0.16em !important;
       text-transform: uppercase !important;
-      color: var(--dim) !important;
+      color: #6b6b6b !important;
       display: block !important;
       margin-bottom: 8px !important;
       margin-top: 20px !important;
     }
 
-    .hbspt-form .hs-error-msgs {
+    /* Checkbox / radio labels override */
+    .hbspt-form .hs-form-checkbox label,
+    .hbspt-form .hs-form-radio label {
+      color: #f0ede8 !important;
+      font-family: 'Archivo', sans-serif !important;
+      font-size: 0.875rem !important;
+      font-weight: 300 !important;
+      letter-spacing: 0 !important;
+      text-transform: none !important;
+      margin-top: 0 !important;
+      display: flex !important;
+      align-items: center !important;
+      gap: 8px !important;
+    }
+
+    .hbspt-form .hs-form-checkbox input[type="checkbox"],
+    .hbspt-form .hs-form-radio input[type="radio"] {
+      width: 16px !important;
+      height: 16px !important;
+      accent-color: #3ab4f2 !important;
+      flex-shrink: 0 !important;
+    }
+
+    .hbspt-form .inputs-list {
       list-style: none !important;
-      margin-top: 6px !important;
-    }
-
-    .hbspt-form .hs-error-msgs li label {
-      color: var(--red) !important;
-      font-size: 0.6rem !important;
+      padding: 0 !important;
       margin: 0 !important;
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 10px !important;
     }
 
+    /* Submit button */
+    .hbspt-form input[type="submit"],
     .hbspt-form .hs-button {
       margin-top: 32px !important;
-      background: var(--white) !important;
-      color: var(--black) !important;
+      background: #f0ede8 !important;
+      color: #0a0a0a !important;
+      -webkit-text-fill-color: #0a0a0a !important;
       border: none !important;
       border-radius: 0 !important;
       font-family: 'Space Mono', monospace !important;
@@ -284,108 +332,27 @@
       text-transform: uppercase !important;
       padding: 16px 36px !important;
       cursor: pointer !important;
-      transition: background 0.2s !important;
       width: auto !important;
+      transition: background 0.2s !important;
     }
 
+    .hbspt-form input[type="submit"]:hover,
     .hbspt-form .hs-button:hover {
-      background: var(--accent) !important;
+      background: #3ab4f2 !important;
     }
 
-    /* ─── FORCE HUBSPOT DARK THEME ─── */
-.hbspt-form { color-scheme: dark; }
+    /* Errors */
+    .hbspt-form .hs-error-msgs { list-style: none !important; margin-top: 6px !important; }
+    .hbspt-form .hs-error-msgs li label { color: #c0392b !important; font-size: 0.6rem !important; margin: 0 !important; }
 
-.hbspt-form .hs-form-field { margin-bottom: 20px; }
-
-.hbspt-form .hs-input:not([type=checkbox]):not([type=radio]),
-.hbspt-form input[type=text],
-.hbspt-form input[type=email],
-.hbspt-form input[type=tel],
-.hbspt-form input[type=number],
-.hbspt-form textarea,
-.hbspt-form select {
-  background-color: #171717 !important;
-  background: #171717 !important;
-  color: #f0ede8 !important;
-  border: 1px solid rgba(240,237,232,0.12) !important;
-  border-radius: 0 !important;
-  font-family: "Archivo", sans-serif !important;
-  font-size: 0.9rem !important;
-  padding: 14px 16px !important;
-  width: 100% !important;
-  box-shadow: none !important;
-  outline: none !important;
-  -webkit-appearance: none !important;
-  appearance: none !important;
-}
-
-.hbspt-form .hs-input:not([type=checkbox]):not([type=radio]):focus,
-.hbspt-form input:focus,
-.hbspt-form textarea:focus,
-.hbspt-form select:focus {
-  border-color: #3ab4f2 !important;
-  background-color: #1e1e1e !important;
-  background: #1e1e1e !important;
-}
-
-.hbspt-form .hs-input::placeholder,
-.hbspt-form input::placeholder,
-.hbspt-form textarea::placeholder {
-  color: #6b6b6b !important;
-  opacity: 1 !important;
-}
-
-.hbspt-form option {
-  background: #171717 !important;
-  color: #f0ede8 !important;
-}
-
-.hbspt-form .hs-form-checkbox label,
-.hbspt-form .hs-form-radio label {
-  color: #f0ede8 !important;
-  font-family: "Archivo", sans-serif !important;
-  font-size: 0.875rem !important;
-  font-weight: 300 !important;
-  letter-spacing: 0 !important;
-  text-transform: none !important;
-  margin-top: 0 !important;
-  display: flex !important;
-  align-items: center !important;
-  gap: 8px !important;
-  cursor: pointer !important;
-}
-
-.hbspt-form .hs-form-checkbox input[type=checkbox],
-.hbspt-form .hs-form-radio input[type=radio] {
-  width: 16px !important;
-  height: 16px !important;
-  accent-color: #3ab4f2 !important;
-  flex-shrink: 0 !important;
-}
-
-.hbspt-form .inputs-list {
-  list-style: none !important;
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 10px !important;
-  padding: 0 !important;
-  margin: 0 !important;
-}
-
-.hbspt-form .hs-richtext,
-.hbspt-form .hs-richtext p {
-  color: #6b6b6b !important;
-  font-size: 0.8rem !important;
-  font-family: "Archivo", sans-serif !important;
-}
-
-.hbspt-form .submitted-message {
+    /* Success message */
+    .hbspt-form .submitted-message {
       font-family: 'Space Mono', monospace !important;
       font-size: 0.8rem !important;
-      color: var(--accent) !important;
+      color: #3ab4f2 !important;
       letter-spacing: 0.1em !important;
       padding: 24px 0 !important;
-      border-top: 1px solid var(--border) !important;
+      border-top: 1px solid rgba(240,237,232,0.08) !important;
     }
 
     .response-note {
@@ -407,19 +374,10 @@
     }
 
     /* ─── FAQ ─── */
-    .faq-categories {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-    }
+    .faq-categories { display: flex; flex-direction: column; }
 
-    .faq-category {
-      border-top: 1px solid var(--border);
-    }
-
-    .faq-category:last-child {
-      border-bottom: 1px solid var(--border);
-    }
+    .faq-category { border-top: 1px solid var(--border); }
+    .faq-category:last-child { border-bottom: 1px solid var(--border); }
 
     .faq-category-header {
       padding: 28px 0;
@@ -455,22 +413,12 @@
       line-height: 1;
     }
 
-    .faq-category.open .faq-category-toggle {
-      transform: rotate(45deg);
-      color: var(--accent);
-    }
+    .faq-category.open .faq-category-toggle { transform: rotate(45deg); color: var(--accent); }
 
-    .faq-items {
-      display: none;
-      flex-direction: column;
-      padding-bottom: 20px;
-    }
-
+    .faq-items { display: none; flex-direction: column; padding-bottom: 20px; }
     .faq-category.open .faq-items { display: flex; }
 
-    .faq-item {
-      border-top: 1px solid var(--border);
-    }
+    .faq-item { border-top: 1px solid var(--border); }
 
     .faq-question {
       padding: 22px 0 22px 24px;
@@ -482,24 +430,10 @@
       gap: 20px;
     }
 
-    .faq-question-text {
-      font-size: 0.95rem;
-      font-weight: 500;
-      color: var(--white);
-      line-height: 1.4;
-    }
+    .faq-question-text { font-size: 0.95rem; font-weight: 500; color: var(--white); line-height: 1.4; }
 
-    .faq-toggle {
-      color: var(--dim);
-      font-size: 1rem;
-      transition: transform 0.25s, color 0.2s;
-      flex-shrink: 0;
-    }
-
-    .faq-item.open .faq-toggle {
-      transform: rotate(45deg);
-      color: var(--accent);
-    }
+    .faq-toggle { color: var(--dim); font-size: 1rem; transition: transform 0.25s, color 0.2s; flex-shrink: 0; }
+    .faq-item.open .faq-toggle { transform: rotate(45deg); color: var(--accent); }
 
     .faq-answer {
       display: none;
@@ -512,75 +446,6 @@
     }
 
     .faq-item.open .faq-answer { display: block; }
-
-    /* ─── CONTACT FALLBACK ─── */
-    .contact-fallback {
-      padding: 80px 52px;
-      border-bottom: 1px solid var(--border);
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: center;
-    }
-
-    .contact-fallback h3 {
-      font-family: 'Archivo Black', sans-serif;
-      font-size: 2rem;
-      text-transform: uppercase;
-      line-height: 0.95;
-      margin-bottom: 16px;
-    }
-
-    .contact-fallback p {
-      color: var(--dim);
-      font-size: 0.9rem;
-      line-height: 1.75;
-      font-weight: 300;
-    }
-
-    .contact-links {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .contact-link {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 24px 28px;
-      background: var(--black3);
-      border: 1px solid var(--border);
-      text-decoration: none;
-      color: var(--white);
-      transition: border-color 0.2s, background 0.2s;
-    }
-
-    .contact-link:hover {
-      border-color: rgba(58,180,242,0.3);
-      background: rgba(58,180,242,0.04);
-    }
-
-    .contact-link-left {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .contact-link-label {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.58rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--dim);
-    }
-
-    .contact-link-value {
-      font-size: 0.9rem;
-      font-weight: 500;
-    }
-
-    .contact-link-arrow { color: var(--accent); }
 
     /* ─── STICKY BAR ─── */
     .sticky-bar {
@@ -615,12 +480,7 @@
     }
 
     .sticky-btn:first-child:hover { background: var(--accent); }
-
-    .sticky-btn:last-child {
-      color: var(--white);
-      background: transparent;
-    }
-
+    .sticky-btn:last-child { color: var(--white); background: transparent; }
     .sticky-btn:last-child:hover { background: rgba(240,237,232,0.06); }
 
     /* ─── MOBILE ─── */
@@ -632,7 +492,6 @@
       .quick-links { grid-template-columns: 1fr; }
       .quick-link { border-right: none; border-bottom: 1px solid var(--border); padding: 32px 20px; }
       .section { padding: 80px 20px; }
-      .contact-fallback { grid-template-columns: 1fr; padding: 80px 20px; gap: 40px; }
     }
   </style>
 </head>
@@ -685,15 +544,8 @@
 <section class="section" id="ticket">
   <div class="section-tag" data-num="01 —">Submit a Ticket</div>
   <h2 class="section-title">Tell us<br/>what's wrong.</h2>
-  <div class="form-wrap">
-    <script charset="utf-8" type="text/javascript" src="//js-eu1.hsforms.net/forms/embed/v2.js"></script>
-    <script>
-      hbspt.forms.create({
-        portalId: "148600057",
-        formId: "dce25f48-51fd-45fe-b30d-84e1e6383628",
-        region: "eu1"
-      });
-    </script>
+  <div class="form-wrap" id="hs-form-wrap">
+    <script charset="utf-8" type="text/javascript" src="//js-eu1.hsforms.net/forms/embed/v2.js" onload="initHubspotForm()"></script>
     <p class="response-note">Response within 1 business day — urgent issues prioritised</p>
   </div>
 </section>
@@ -708,14 +560,11 @@
     <!-- GETTING STARTED -->
     <div class="faq-category">
       <div class="faq-category-header" onclick="toggleCategory(this)">
-        <div class="faq-category-title">
-          Getting Started
-          <span class="faq-cat-tag">03 questions</span>
-        </div>
+        <div class="faq-category-title">Getting Started <span class="faq-cat-tag">03 questions</span></div>
         <span class="faq-category-toggle">+</span>
       </div>
       <div class="faq-items">
-         <div class="faq-item">
+        <div class="faq-item">
           <div class="faq-question" onclick="toggleFaq(this)">
             <span class="faq-question-text">Does it work on any generator brand?</span>
             <span class="faq-toggle">+</span>
@@ -742,10 +591,7 @@
     <!-- DEVICE & HARDWARE -->
     <div class="faq-category">
       <div class="faq-category-header" onclick="toggleCategory(this)">
-        <div class="faq-category-title">
-          Device & Hardware
-          <span class="faq-cat-tag">03 questions</span>
-        </div>
+        <div class="faq-category-title">Device & Hardware <span class="faq-cat-tag">03 questions</span></div>
         <span class="faq-category-toggle">+</span>
       </div>
       <div class="faq-items">
@@ -776,10 +622,7 @@
     <!-- ALERTS & NOTIFICATIONS -->
     <div class="faq-category">
       <div class="faq-category-header" onclick="toggleCategory(this)">
-        <div class="faq-category-title">
-          Alerts & Notifications
-          <span class="faq-cat-tag">03 questions</span>
-        </div>
+        <div class="faq-category-title">Alerts & Notifications <span class="faq-cat-tag">03 questions</span></div>
         <span class="faq-category-toggle">+</span>
       </div>
       <div class="faq-items">
@@ -788,21 +631,21 @@
             <span class="faq-question-text">Who receives the SMS alerts?</span>
             <span class="faq-toggle">+</span>
           </div>
-          <div class="faq-answer">Alerts are sent to the service contacts configured in your dashboard. You can update contacts at any time by contacting support. </div>
+          <div class="faq-answer">Alerts are sent to the service contacts configured in your dashboard. You can update contacts at any time by contacting support.</div>
         </div>
         <div class="faq-item">
           <div class="faq-question" onclick="toggleFaq(this)">
             <span class="faq-question-text">What events trigger an alert?</span>
             <span class="faq-toggle">+</span>
           </div>
-          <div class="faq-answer">Configurable alert conditions include: generator failure to start, unexpected shutdown, low fuel, loss of mains power, and device going offline. </div>
+          <div class="faq-answer">Configurable alert conditions include: generator failure to start, unexpected shutdown, low fuel, loss of mains power, and device going offline.</div>
         </div>
         <div class="faq-item">
           <div class="faq-question" onclick="toggleFaq(this)">
             <span class="faq-question-text">I am not receiving alerts. What should I check?</span>
             <span class="faq-toggle">+</span>
           </div>
-          <div class="faq-answer">Contact Support to Verify that the contact number is correctly entered in the dashboard and ensure that SMS is not blocked by your carrier.</div>
+          <div class="faq-answer">Contact support to verify that the contact number is correctly entered in the dashboard and ensure that SMS is not blocked by your carrier.</div>
         </div>
       </div>
     </div>
@@ -810,10 +653,7 @@
     <!-- BILLING & ACCOUNT -->
     <div class="faq-category">
       <div class="faq-category-header" onclick="toggleCategory(this)">
-        <div class="faq-category-title">
-          Billing & Account
-          <span class="faq-cat-tag">02 questions</span>
-        </div>
+        <div class="faq-category-title">Billing & Account <span class="faq-cat-tag">02 questions</span></div>
         <span class="faq-category-toggle">+</span>
       </div>
       <div class="faq-items">
@@ -833,6 +673,9 @@
         </div>
       </div>
     </div>
+
+  </div>
+</section>
 
 <!-- STICKY BAR -->
 <div class="sticky-bar">
@@ -854,16 +697,32 @@
 </div>
 
 <script>
-  // Force dark styles on HubSpot form after it renders
+  function initHubspotForm() {
+    hbspt.forms.create({
+      portalId: "148600057",
+      formId: "dce25f48-51fd-45fe-b30d-84e1e6383628",
+      region: "eu1",
+      onFormReady: function() {
+        applyHubspotDark();
+      },
+      onFormSubmit: function() {
+        applyHubspotDark();
+      }
+    });
+  }
+
   function applyHubspotDark() {
-    const inputs = document.querySelectorAll('.hbspt-form input:not([type=checkbox]):not([type=radio]), .hbspt-form textarea, .hbspt-form select');
-    inputs.forEach(el => {
+    const sel = '.hbspt-form input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]), .hbspt-form textarea, .hbspt-form select';
+    document.querySelectorAll(sel).forEach(el => {
       el.style.setProperty('background-color', '#171717', 'important');
       el.style.setProperty('background', '#171717', 'important');
       el.style.setProperty('color', '#f0ede8', 'important');
+      el.style.setProperty('-webkit-text-fill-color', '#f0ede8', 'important');
+      el.style.setProperty('caret-color', '#3ab4f2', 'important');
       el.style.setProperty('border', '1px solid rgba(240,237,232,0.12)', 'important');
       el.style.setProperty('border-radius', '0', 'important');
       el.style.setProperty('font-family', 'Archivo, sans-serif', 'important');
+      el.style.setProperty('font-size', '0.9rem', 'important');
       el.style.setProperty('padding', '14px 16px', 'important');
       el.style.setProperty('width', '100%', 'important');
       el.style.setProperty('box-shadow', 'none', 'important');
@@ -877,8 +736,8 @@
         this.style.setProperty('border-color', 'rgba(240,237,232,0.12)', 'important');
       });
     });
-    const labels = document.querySelectorAll('.hbspt-form label');
-    labels.forEach(el => {
+
+    document.querySelectorAll('.hbspt-form label').forEach(el => {
       if (!el.closest('.hs-form-checkbox') && !el.closest('.hs-form-radio')) {
         el.style.setProperty('color', '#6b6b6b', 'important');
         el.style.setProperty('font-family', 'Space Mono, monospace', 'important');
@@ -887,10 +746,12 @@
         el.style.setProperty('text-transform', 'uppercase', 'important');
       }
     });
-    const btn = document.querySelector('.hbspt-form .hs-button');
+
+    const btn = document.querySelector('.hbspt-form input[type="submit"], .hbspt-form .hs-button');
     if (btn) {
       btn.style.setProperty('background', '#f0ede8', 'important');
       btn.style.setProperty('color', '#0a0a0a', 'important');
+      btn.style.setProperty('-webkit-text-fill-color', '#0a0a0a', 'important');
       btn.style.setProperty('border', 'none', 'important');
       btn.style.setProperty('border-radius', '0', 'important');
       btn.style.setProperty('font-family', 'Space Mono, monospace', 'important');
@@ -900,30 +761,27 @@
       btn.style.setProperty('padding', '16px 36px', 'important');
       btn.style.setProperty('cursor', 'pointer', 'important');
       btn.style.setProperty('margin-top', '32px', 'important');
-      btn.addEventListener('mouseover', function() { this.style.setProperty('background', '#3ab4f2', 'important'); });
+      btn.addEventListener('mouseover', function() { this.style.setProperty('background', '#3ab4f2', 'important'); this.style.setProperty('-webkit-text-fill-color', '#0a0a0a', 'important'); });
       btn.addEventListener('mouseout', function() { this.style.setProperty('background', '#f0ede8', 'important'); });
     }
   }
 
-  // Watch for HubSpot form to render
-  const observer = new MutationObserver(() => {
-    if (document.querySelector('.hbspt-form input, .hbspt-form select')) {
-      applyHubspotDark();
-    }
+  // MutationObserver as fallback
+  const hsObserver = new MutationObserver(() => {
+    const form = document.querySelector('.hbspt-form input, .hbspt-form select');
+    if (form) { applyHubspotDark(); }
   });
-  observer.observe(document.body, { childList: true, subtree: true });
-  // Also try after delays in case MutationObserver misses it
-  setTimeout(applyHubspotDark, 1000);
-  setTimeout(applyHubspotDark, 2500);
+  hsObserver.observe(document.body, { childList: true, subtree: true });
+
+  setTimeout(applyHubspotDark, 800);
+  setTimeout(applyHubspotDark, 2000);
 
   function toggleCategory(header) {
-    const cat = header.parentElement;
-    cat.classList.toggle('open');
+    header.parentElement.classList.toggle('open');
   }
 
   function toggleFaq(question) {
-    const item = question.parentElement;
-    item.classList.toggle('open');
+    question.parentElement.classList.toggle('open');
   }
 </script>
 </body>
